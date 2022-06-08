@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #23252c;
+  font-family: 'Inter', serif;
+  font-size: 12px;
+}
+
+.content {
+  width: 317px;
+  padding: 35px;
+  background-color: #1A1B21;
+}
