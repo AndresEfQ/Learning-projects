@@ -1,0 +1,82 @@
+body {
+  background-color: hsla(21, 0%, 12%, 1);
+  color: hsla(170, 0%, 60%, 1);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  margin-top: 70px;
+}
+
+#home {
+  height: auto;
+  width: 80px;
+  position: absolute;
+  margin: 0px;
+  top: 20px;
+  left: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: hsla(328, 42%, 50%, 1);
+}
+
+p {
+  line-height: 1.2;
+}
+
+#subtitle {
+  text-align: center;
+  color: hsla(275, 38%, 50%, 1);
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.cont1 {
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 5%;
+  margin-bottom: 0%;
+}
+
+h1, 
+h3 {
+  text-align: center;
+  color: hsla(21, 0%, 12%, 1);
+}
+
+h3 {
+  background-color: hsla(275, 38%, 50%, 1);
+  font-size: 30px;
+  margin-left: 30%;
+  margin-right: 30%;
+  border-radius: 10px;
+}
+
+h1 {
+  font-size: 60px;
+  background-color: hsla(328, 42%, 50%, 1);
+  border-radius: 20px;
+}
+
+h5 {
+  color: hsla(275, 38%, 50%, 1);
+  font-size: 20px;
+}
+
+img {
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  display: block;
+  border-radius: 30px;
+}
+
+.footer p {
+  margin: 0% 0%;
+}
+
+.steps li {
+  margin: 20px;
+}
