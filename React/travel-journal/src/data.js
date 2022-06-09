@@ -1,8 +1,8 @@
-import MountFuji from "./images/MountFuji.png";
+import MountFuji from "./images/mountFuji.png";
 import OperaHouse from "./images/operaHouse.png";
-import GeirangerFjord from "./images/GeirangerFjord";
+import GeirangerFjord from "./images/geirangerFjord.png";
 
-const data = [
+const Data = [
   {
     id: 1,
     title: "Mount Fuji",
@@ -35,4 +35,4 @@ const data = [
   }
 ]
 
-export default data;
+export default Data;
