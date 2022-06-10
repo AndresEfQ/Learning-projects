@@ -3,7 +3,7 @@ import { ImLocation } from "react-icons/im"
 
 export default function Entry(props) {
   return (
-    <div>
+    <div className="entry">
       <img src={props.imageUrl} alt={props.title} />
       <div className="content">
         <div className="location">
@@ -15,7 +15,6 @@ export default function Entry(props) {
         <h4>{`${props.startDate} - ${props.endDate}`}</h4>
         <p>{props.description}</p>
       </div>
-      <hr />
     </div>
   )
 }
