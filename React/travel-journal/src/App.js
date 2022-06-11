@@ -8,9 +8,8 @@ function App() {
   const entries = Data.map((item) => {
     return (
       <Entry key={item.id} {...item} />
-    )
+    ) 
   })
-  console.log(entries);
   return (
     <div className="container">
       <Header />
