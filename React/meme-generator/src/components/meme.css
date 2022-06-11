@@ -1,0 +1,31 @@
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 15px;
+  margin: 36px;
+}
+
+form > div {
+  display: flex;
+  gap: 17px;
+}
+
+input {
+  flex: 1;
+  padding: 0 10px;
+  font-family: 'Karla', sans-serif;
+  border-radius: 5px;
+  border: 1px solid #D5D4D8;
+  height: 35px;
+}
+
+input[type="button"] {
+  padding: 10px;
+  line-height: 20px;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  background-image: linear-gradient(to right, #672280, #A626D3);
+  border: none;
+}
