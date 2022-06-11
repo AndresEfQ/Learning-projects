@@ -28,4 +28,5 @@ input[type="button"] {
   font-weight: 700;
   background-image: linear-gradient(to right, #672280, #A626D3);
   border: none;
+  cursor: pointer;
 }
