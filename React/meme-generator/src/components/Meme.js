@@ -9,7 +9,7 @@ function Meme() {
 
   let image;
   if (memeImage) {
-    image = <img src="https://i.imgflip.com/3si4.jpg" alt="Meme" />
+    image = <img src={memeImage} alt="Meme" />
   } else {
     image = null;
   }
