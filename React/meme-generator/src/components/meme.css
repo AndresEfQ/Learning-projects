@@ -30,3 +30,9 @@ input[type="button"] {
   border: none;
   cursor: pointer;
 }
+
+.image > img{
+  height: 268px;
+  width: 477px;
+  margin: 0 36px 36px 36px;
+}
