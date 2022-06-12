@@ -31,8 +31,37 @@ input[type="button"] {
   cursor: pointer;
 }
 
-.image > img{
-  height: 268px;
+.image {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  font-family: 'Anton', sans-serif;
+  font-size: 32px;
+  font-weight: 900;
+  text-shadow: 1px 1px 2px #000,
+              -1px 1px 2px #000,
+               1px -1px 2px #000,
+              -1px -1px 2px #000;
+  letter-spacing: 0.05em;
+  height: 304px;
   width: 477px;
-  margin: 0 36px 36px 36px;
+  margin: 0 36px 0 36px;
+  padding-bottom: 36px;
+}
+
+.image > img {
+  width: 100%;
+  height: 100%;
+}
+
+.upper-text {
+  position: absolute;
+  top: 16px;
+}
+
+.lower-text {
+  position: absolute;
+  bottom: 52px;
 }
