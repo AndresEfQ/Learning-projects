@@ -1,27 +1,29 @@
 import React, { useState } from "react";
 import "./meme.css";
-import Data from "../memesData";
+import memesData from "../memesData";
 
 function Meme() {
-  const [state, setState] = React.useState({
+
+  const [meme, setMeme] = useState({
     memeImage: "",
     upperText: "",
     lowerText: ""
-  })
+  });
+  const [allMemeImages, setAllMemeImages] = useState(memesData)
 
   function getMemeImage() {
-    const memesArray = Data.data.memes
+    const memesArray = allMemeImages.data.memes
     const randomNumb = Math.floor(Math.random() * memesArray.length);
     const {url} = memesArray[randomNumb];
-    setState({...state, memeImage: url})
+    setMeme({...meme, memeImage: url})
   }
 
   function insertUpperText(e) {
-    setState({...state, upperText: e.target.value.toUpperCase()});
+    setMeme({...meme, upperText: e.target.value.toUpperCase()});
   }
 
   function insertLoweText(e) {
-    setState({...state, lowerText: e.target.value.toUpperCase()});
+    setMeme({...meme, lowerText: e.target.value.toUpperCase()});
   }
 
   return (
@@ -34,12 +36,12 @@ function Meme() {
         <input type="button" value="Get a new meme image 🖼" onClick={getMemeImage} />
       </form>
       <div className="image">
-        { state.memeImage ? 
-          <img src={state.memeImage} alt="Meme" /> :
+        { meme.memeImage ? 
+          <img src={meme.memeImage} alt="Meme" /> :
           null
         }
-        <div className="upper-text">{state.upperText}</div>
-        <div className="lower-text">{state.lowerText}</div>
+        <div className="upper-text">{meme.upperText}</div>
+        <div className="lower-text">{meme.lowerText}</div>
       </div>
     </main>
   )
