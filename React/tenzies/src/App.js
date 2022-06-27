@@ -1,10 +1,23 @@
 import React from "react";
+import "./styles.css";
+import Die from "./components/Die"
 
 function App() {
   return (
-    <div>
-      Hello world
-    </div>
+    <main>
+      <div className="dice-container">
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+        <Die value="1" />
+      </div>
+    </main>
   );
 }
 
