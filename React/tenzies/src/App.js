@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import Die from "./components/Die"
+import {nanoid} from "nanoid"
 
 export default function App() {
 
@@ -9,7 +10,11 @@ export default function App() {
   function allNewDice() {
     let newDice = [];
     for (let i = 0; i < 10; i++) {
-      newDice.push(Math.ceil(Math.random() * 6));
+      newDice.push({
+        id: nanoid(),
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false
+      });
     }
     
     return newDice;
@@ -19,10 +24,25 @@ export default function App() {
     setDice(allNewDice());
   }
 
+  function holdDice(id) {
+    setDice(prevDice => prevDice.map(die => {
+      if (die.id === id) {
+        return {...die, isHeld: !die.isHeld};
+      }
+
+      return die;
+    }));
+  }
+
   return (
     <main>
       <div className="dice-container">
-        {dice.map(die => <Die value={die} />)}
+        {dice.map(die => <Die 
+          key={die.id}
+          value={die.value} 
+          isHeld={die.isHeld}
+          handleClick={() => holdDice(die.id)}
+        />)}
       </div>
       <button className="roll-dice" onClick={refreshDice}>Roll</button>
     </main>
