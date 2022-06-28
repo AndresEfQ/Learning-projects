@@ -6,6 +6,7 @@ import Confetti from "react-confetti";
 
 export default function App() {
 
+  const valueArray = ["one", "two", "three", "four", "five", "six"]
   const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
 
@@ -17,13 +18,13 @@ export default function App() {
       setTenzies(true);
       console.log("You won!");
     }
-    console.log(tenzies);
+    console.log(dice);
   }, [dice])
 
   function generateNewDie() {
     return {
       id: nanoid(),
-      value: Math.ceil(Math.random() * 6),
+      value: valueArray[Math.floor(Math.random() * 6)],
       isHeld: false
     }
   }
