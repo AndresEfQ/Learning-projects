@@ -67,7 +67,9 @@ export default function App() {
           handleClick={() => holdDice(die.id)}
         />)}
       </div>
-      <button className="roll-dice" onClick={refreshDice}>{tenzies ? "New Game" : "Roll"}</button>
+      <button className="roll-dice" onClick={refreshDice}>
+        {tenzies ? "New Game" : "Roll"}
+      </button>
     </main>
   );
 }
