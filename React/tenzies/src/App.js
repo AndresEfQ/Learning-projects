@@ -113,7 +113,8 @@ export default function App() {
         </div>
         <div className="time">
           <div>
-            Your Time: {Math.round(gameTime / 100) / 10}
+            Your Time: 
+            <span className="time_count">{Math.round(gameTime / 100) / 10}</span>
             <span>Sec</span>
           </div>
           <div>
