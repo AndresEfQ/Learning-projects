@@ -86,3 +86,14 @@ section {
   flex-direction: row;
   justify-content: space-between;
 }
+
+.time > div {
+  width: 160px;
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.time span {
+  margin-left: auto;
+}
