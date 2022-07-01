@@ -11,7 +11,7 @@ export default function App() {
   const [tenzies, setTenzies] = useState(false);
   const [score, setScore] = useState({rolls: 0, time: 0});
   const [gameTime, setGameTime] = useState(0);
-  let timer;
+  const [timer, setTimer] = useState();
   const gameRunning = useRef(false);
 
   useEffect (() => {
@@ -74,7 +74,7 @@ export default function App() {
     }));
 
     if (!gameRunning.current) {
-      timer = setInterval(recordTime, 100);
+      setTimer (setInterval(recordTime, 100));
       gameRunning.current = true;
       console.log("timer setted")
     }
