@@ -82,16 +82,20 @@ section {
 }
 
 .time > div {
-  width: 160px;
+  width: 180px;
   display: flex;
   justify-content: flex-start;
 }
 
-.time span {
+/* .time span {
   margin-left: auto;
-}
+} */
 
-.time .time_count {
-  margin-left: 5px;
+.time_value, .roll_value {
+  margin-left: 10px;
+  margin-right: auto;
   text-align: left;
+  font-family: 'Ubuntu Mono', monospace;
+  font-weight: 700;
+  font-size: 20px;
 }

@@ -10,9 +10,8 @@ export default function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
   const [score, setScore] = useState({rolls: 0, time: 0});
-  const [gameTime, setGameTime] = useState(0);
-  const [timer, setTimer] = useState();
   const gameRunning = useRef(false);
+  const localScore = localStorage.getItem('bestScore')
 
   useEffect (() => {
     const allHeld = dice.every(die => die.isHeld);
@@ -20,21 +19,27 @@ export default function App() {
 
     if (allHeld && allSameValue) {
       setTenzies(true);
-      clearInterval(timer);
+      clearInterval(score.timer);
       console.log("you won");
     }
-  }, [dice, timer])
+  }, [dice, score])
 
   useEffect(() => {
     let bestScore = JSON.parse(localStorage.getItem('bestScore')) || {rolls: Infinity, time: 0};
 
     if (tenzies) {
-      if (score.rolls < bestScore.rolls) {
+
+      if (score.rolls < bestScore.rolls || 
+          score.time < bestScore.time) {
         bestScore = score
         localStorage.setItem('bestScore', JSON.stringify(score))
       }
+
+      if (score.time < bestScore.time) {
+
+      }
     }
-  }, [tenzies, score, gameTime])
+  }, [tenzies, score])
 
   function generateNewDie() {
     return {
@@ -74,14 +79,16 @@ export default function App() {
     }));
 
     if (!gameRunning.current) {
-      setTimer (setInterval(recordTime, 100));
+      setScore (prevScore => ({...prevScore, timer: setInterval(recordTime, 100)}));
       gameRunning.current = true;
       console.log("timer setted")
     }
   }
 
   function recordTime() {
-    setGameTime(prevGameTime => prevGameTime + 0.1)
+    setScore(prevScore => (
+      {...prevScore, time: prevScore.time + 0.1}
+    ))
   }
 
   return (
@@ -103,22 +110,32 @@ export default function App() {
       <section>
         <div>
           <div>
-            Your Score: {score.rolls}
+            Your Score: <span className="roll_value">{score.rolls}</span>
           </div>
           <div>
-            Best Score: {JSON.parse(localStorage.getItem('bestScore')).rolls}
+            Best Score: <span className="roll_value">
+              {localScore ?
+              JSON.parse(localScore).rolls :
+              "N/A"}
+            </span>
           </div>
         </div>
         <div className="time">
           <div>
             Your Time: 
-            <span className="time_count">
-              {(Math.round(gameTime * 10) / 10).toFixed(1)}
+            <span className="time_value">
+              {(Math.floor(score.time * 10) / 10).toFixed(1)}
             </span>
             <span>Sec</span>
           </div>
           <div>
-            Best Time: {JSON.parse(localStorage.getItem('bestScore')).time}
+            Best Time: 
+            <span className="time_value">
+              {localScore ?
+              (Math.round(JSON.parse(localScore).time * 10) / 10).toFixed(1) :
+              "N/A"}
+            </span>
+            <span>Sec</span>
           </div>
         </div>
       </section>
