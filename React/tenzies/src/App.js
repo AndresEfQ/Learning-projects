@@ -1,6 +1,7 @@
 import { React, useState, useEffect, useRef } from "react";
 import "./styles.css";
 import Die from "./components/Die";
+import Timer from "./components/Timer";
 import {nanoid} from "nanoid";
 import Confetti from "react-confetti";
 
@@ -112,7 +113,7 @@ export default function App() {
         <div className="time">
           <div>
             Your Time: 
-            <span className="time_count">{(Math.round(gameTime * 10) / 10).toFixed(1)}</span>
+            <Timer gameTime={gameTime} />
             <span>Sec</span>
           </div>
           <div>
