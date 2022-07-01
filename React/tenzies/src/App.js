@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useRef } from "react";
+import { React, useState, useEffect } from "react";
 import "./styles.css";
 import Die from "./components/Die";
 import {nanoid} from "nanoid";
@@ -7,12 +7,12 @@ import Confetti from "react-confetti";
 export default function App() {
 
   const valueArray = ["one", "two", "three", "four", "five", "six"]
+
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
   const [score, setScore] = useState({rolls: 0, time: 0});
   const [gameTime, setGameTime] = useState(0);
-  let timer;
-  const gameRunning = useRef(false);
+  /* const [gameTime, setGameTime] = useState({start: 0, enlapsedTime: 0}); */
 
   useEffect (() => {
     const allHeld = dice.every(die => die.isHeld);
@@ -20,13 +20,24 @@ export default function App() {
 
     if (allHeld && allSameValue) {
       setTenzies(true);
-      clearInterval(timer);
-      console.log("you won");
+      /* setScore(prevScore => ({
+        ...prevScore, 
+        time: enlapsedTime
+      })) */
+      /* setGameTime(prevGameTime => ({...prevGameTime, enlapsedTime: new Date() - prevGameTime.start})); */
     }
-  }, [dice, timer])
+    /* console.log(gameTime); */
+/*     console.log(enlapsedTime); */
+  }, [dice])
 
   useEffect(() => {
     let bestScore = JSON.parse(localStorage.getItem('bestScore')) || {rolls: Infinity, time: 0};
+
+    setInterval(() => {
+      setGameTime(prevGameTime => prevGameTime + 0.1)
+    }, 100)
+
+    /* setGameTime({start: new Date(), enlapsedTime: 0}); */
 
     if (tenzies) {
       if (score.rolls < bestScore.rolls) {
@@ -34,6 +45,8 @@ export default function App() {
         localStorage.setItem('bestScore', JSON.stringify(score))
       }
     }
+    console.log("best score " + bestScore.rolls);
+    console.log(gameTime);
   }, [tenzies, score, gameTime])
 
   function generateNewDie() {
@@ -57,7 +70,6 @@ export default function App() {
     if (tenzies) {
       setDice(allNewDice());
       setTenzies(false);
-      gameRunning.current = false;
       setScore({rolls: 0, time: 0});
 
     } else {
@@ -72,16 +84,6 @@ export default function App() {
     setDice(prevDice => prevDice.map(die => {
       return die.id === id ? {...die, isHeld: !die.isHeld} : die;
     }));
-
-    if (!gameRunning.current) {
-      timer = setInterval(recordTime, 100);
-      gameRunning.current = true;
-      console.log("timer setted")
-    }
-  }
-
-  function recordTime() {
-    setGameTime(prevGameTime => prevGameTime + 0.1)
   }
 
   return (
@@ -112,7 +114,7 @@ export default function App() {
         <div className="time">
           <div>
             Your Time: 
-            <span className="time_count">{(Math.round(gameTime * 10) / 10).toFixed(1)}</span>
+            <span className="time_count">{Math.round(gameTime / 100) / 10}</span>
             <span>Sec</span>
           </div>
           <div>
