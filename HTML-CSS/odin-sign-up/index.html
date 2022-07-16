@@ -9,6 +9,46 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-  hello file
+  <aside>
+    <div class="logo">
+      <img src="./images/odin-lined.png" alt="logo" />
+      <span>ODIN</span>
+    </div>
+    <footer>Photo by <a href="https://unsplash.com/es/@haliewestphoto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Halie West</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></footer>
+  </aside>
+  <main>
+    <section class="header">
+      <p>This is not a real online service! You know you need something like this in your life to help realize your deepest dreams.</p>
+      <p>Sign up <em>now</em> to get started</p>
+      <p>You <em>know</em> you want to.</p>
+    </section>
+    <section class="form">
+      <h3>Let's do this!</h3>
+      <form action="#" method="get" id="sign-in">
+        <label for="first-name">FIRST NAME</label>
+        <input type="text" name="first-name" id="first-name" required />
+        
+        <label for="last-name">LAST NAME</label>
+        <input type="text" name="last-name" id="last-name" required />
+        
+        <label for="mail">EMAIL</label>
+        <input type="email" name="mail" id="mail" required />
+        
+        <label for="phone">PHONE NUMBER</label>
+        <input type="tel" name="phone" id="phone" required />
+        
+        <label for="pwd">PASSWORD</label>
+        <input type="password" name="pwd" id="pwd" required />
+        
+        <label for="confirm">CONFIRM PASSWORD</label>
+        <input type="text" name="confirm" id="confirm" required />
+
+      </form>
+    </section>
+    <section class="action">
+      <button form="sign-in">Create Account</button>
+      <p>Already have an account? <a href="#">Log in</a></p>
+    </section>
+  </main>
 </body>
 </html>

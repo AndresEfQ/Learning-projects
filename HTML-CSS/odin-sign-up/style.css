@@ -1,3 +1,87 @@
+@font-face {
+  font-family: "Norse Bold";
+  src: url(./fonts/norse/norse-bold-webfont.woff) format("woff"),
+       url(./fonts/norse/norse-bold-webfont.woff2) format("woff2");
+}
+
+*, *:active, *:visited{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  color: red;
+  display: flex;
+  height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 0.9em / 1.2;
+}
+
+aside {
+  flex-basis: 34%;
+  flex-grow: 1;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+  background-image: url(./images/side-image.jpg); 
+  background-size: auto 100vh;
+  background-position: right;
+}
+
+.logo {
+  margin-top: 11em;
+  background-color: rgba(0, 0, 0, 0.4);
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+}
+
+.logo img {
+  width: auto;
+  height: 6em;
+}
+
+.logo span {
+  color: white;
+  font-family: "Norse bold", sans-serif;
+  font-size: 4em;
+}
+
+footer {
+  color: white;
+  margin-bottom: 0.5em;
+  font-size: 0.7em;
+}
+
+a {
+  color: white;
+}
+
+main {
+  height: 100%;
+  flex-basis: 66%;
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+main section {
+  flex: 1;
+}
+
+main .header {
+  font-weight: 600;
+  background-color: rgb(249 250 251);
+  padding-left: 1.5em;
+  padding-right: 7em;
+}
+
+main .header p:last-child {
+  margin-top: 1em;
 }
