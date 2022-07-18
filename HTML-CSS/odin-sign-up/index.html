@@ -29,26 +29,34 @@
           <li>
             <label for="first-name">FIRST NAME</label>
             <input type="text" name="first-name" id="first-name" required />
+            <span class="empty">* Please enter a name</span>
           </li>
           <li>
             <label for="last-name">LAST NAME</label>
             <input type="text" name="last-name" id="last-name" required />
+            <span class="empty visible">* Please enter a last name</span>
           </li>
           <li>
             <label for="mail">EMAIL</label>
             <input type="email" name="mail" id="mail" required />
+            <span class="empty visible">* Please enter an email</span>
+            <span class="format-error">* Please enter a valid email</span>
           </li>
           <li>
             <label for="phone">PHONE NUMBER</label>
-            <input type="tel" name="phone" id="phone" required />
+            <input type="number" name="phone" id="phone" required />
+            <span class="empty">* Please enter a phone number</span>
           </li>
           <li>
             <label for="pwd">PASSWORD</label>
             <input type="password" name="pwd" id="pwd" required />
+            <span class="empty visible">* Please enter a password</span>
+            <span class="not-match visible">* Passwords do not match</span>
           </li>
           <li>
             <label for="confirm">CONFIRM PASSWORD</label>
             <input type="text" name="confirm" id="confirm" required />
+            <span class="empty visible">* Please confirm the password</span>
           </li>
         </ul>
 
