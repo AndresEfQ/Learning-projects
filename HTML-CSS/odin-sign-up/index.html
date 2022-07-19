@@ -24,42 +24,42 @@
     </section>
     <section class="form">
       <h3>Let's do this!</h3>
-      <form action="#" method="get" id="sign-in">
+      <form action="#" method="get" id="sign-in" novalidate>
         <ul>
           <li>
             <label for="first-name">FIRST NAME</label>
-            <input type="text" name="first-name" id="first-name" required />
-            <span class="empty">* Please enter a name</span>
+            <input type="text" name="first-name" id="first-name" required title=""/>
+            <span>* Please enter a name</span>
           </li>
           <li>
             <label for="last-name">LAST NAME</label>
             <input type="text" name="last-name" id="last-name" required />
-            <span class="empty visible">* Please enter a last name</span>
+            <span>* Please enter a last name</span>
           </li>
           <li>
             <label for="mail">EMAIL</label>
             <input type="email" name="mail" id="mail" required />
-            <span class="empty visible">* Please enter an email</span>
-            <span class="format-error">* Please enter a valid email</span>
+            <span>* Please enter an email</span>
+            <span class="wrong-email">* Please enter an email like example@domain.com</span>
           </li>
           <li>
             <label for="phone">PHONE NUMBER</label>
-            <input type="number" name="phone" id="phone" required />
-            <span class="empty">* Please enter a phone number</span>
+            <input type="tel" name="phone" id="phone" required pattern="\(\+[\d]{2}\)[\d]{3}-[\d]{2}-[\d]{2}" />
+            <span>* Please enter a phone number</span>
+            <span>* Please enter a phone number like (+99)999-99-99</span>
           </li>
           <li>
             <label for="pwd">PASSWORD</label>
             <input type="password" name="pwd" id="pwd" required />
-            <span class="empty visible">* Please enter a password</span>
-            <span class="not-match visible">* Passwords do not match</span>
+            <span>* Please enter a password</span>
+            <span class="wrong-match">* Passwords do not match</span>
           </li>
           <li>
             <label for="confirm">CONFIRM PASSWORD</label>
-            <input type="text" name="confirm" id="confirm" required />
-            <span class="empty visible">* Please confirm the password</span>
+            <input type="password" name="confirm" id="confirm" required />
+            <span>* Please confirm the password</span>
           </li>
         </ul>
-
       </form>
     </section>
     <section class="action">

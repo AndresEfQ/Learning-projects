@@ -13,6 +13,7 @@
 body {
   display: flex;
   height: 100vh;
+  width: 100vw;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.5rem;
   line-height: 1.3;
@@ -98,7 +99,7 @@ main section {
 .form {
   justify-content: center;
   gap: 1rem;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .form > * {
@@ -112,6 +113,7 @@ form {
   letter-spacing: 0.1rem;
   color: rgba(0, 0, 0, 0.8);
   height: calc(100% - 4rem);
+  min-height: 220px;
 }
 
 form ul {
@@ -140,7 +142,7 @@ input:focus-visible {
 input {
   max-width: 350px;
   padding-left: 10px;
-  height: 40px;
+  height: 35px;
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   font-family: inherit;
@@ -157,13 +159,39 @@ input:invalid.filled {
 }
 
 form span {
-  display: inline;
   color: rgb(201, 0, 0);
   visibility: hidden;
   position: absolute;
-  bottom: 0;
+  top: 50px;
 }
 
 form span.visible {
   visibility: visible;
+}
+
+.action {
+  margin: 2rem 0 0 3rem;
+  align-items: start;
+  max-width: 800px;
+}
+
+button {
+  background-color: #596D48;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 40px;
+}
+
+.action p {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+}
+
+.action a {
+  color: #596D48;
+  text-decoration: none;
+  font-weight: bold;
 }
