@@ -4,6 +4,10 @@
        url(./fonts/norse/norse-bold-webfont.woff2) format("woff2");
 }
 
+html {
+  margin: 0;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -13,24 +17,24 @@
 body {
   display: flex;
   height: 100vh;
-  width: 100vw;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1.5rem;
   line-height: 1.3;
-  min-height: 477px;
+  min-height: 600px;
+  overflow-x: hidden;
 }
 
 aside {
+  height: 100%;
   flex-basis: 34%;
   flex-grow: 1;
-  max-width: 440px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   background-image: url(./images/side-image.jpg); 
-  background-size: auto max(477px, 100vh);
-  background-position: right;
+  background-size: cover;
+  background-position: center;
 }
 
 .logo {
@@ -55,6 +59,7 @@ aside {
 }
 
 footer {
+  text-align: center;
   color: white;
   margin-bottom: 0.5rem;
   font-size: 0.7rem;
@@ -75,13 +80,14 @@ main {
 }
 
 main section {
-  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-left: 3rem;
 }
 
 .header {
+  height: 33%;
   font-weight: 600;
   background-color: rgb(249 250 251);
   justify-content: center;
@@ -89,22 +95,22 @@ main section {
 
 .header p {
   max-width: 800px;
-  margin-left: 3rem;
 }
 
 .header p:last-child {
   margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .form {
+  margin-top: 1rem;
   justify-content: center;
-  gap: 1rem;
+  gap: 2rem;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
 }
 
 .form > * {
   max-width: 800px;
-  margin-left: 3rem;
 }
 
 form {
@@ -112,8 +118,7 @@ form {
   font-weight: 500;
   letter-spacing: 0.1rem;
   color: rgba(0, 0, 0, 0.8);
-  height: calc(100% - 4rem);
-  min-height: 220px;
+  height: 250px;
 }
 
 form ul {
@@ -135,11 +140,8 @@ li span:last-child {
   margin-bottom: 10px;
 }
 
-input:focus-visible {
-  outline: none;
-}
-
 input {
+  width: 90%;
   max-width: 350px;
   padding-left: 10px;
   height: 35px;
@@ -149,13 +151,30 @@ input {
   font-size: 1rem;
 }
 
-input:focus {
+input:focus, input:hover {
+  outline: none;
   border: 1px solid rgb(67, 95, 255);
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+input:focus {
+  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgb(67, 95, 255);
 }
 
 input:invalid.filled {
   border: 1px solid rgb(201, 0, 0);
+}
+
+li img {
+  visibility: hidden;
+  position: absolute;
+  right: 8px;
+  top: 18px;
+  z-index: 10;
+}
+
+li img:hover {
+  visibility: visible;
 }
 
 form span {
@@ -170,19 +189,28 @@ form span.visible {
 }
 
 .action {
-  margin: 2rem 0 0 3rem;
+  justify-content: center;
   align-items: start;
+  height: 33%;
   max-width: 800px;
 }
 
 button {
   background-color: #596D48;
   color: white;
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: bold;
   border: none;
   border-radius: 5px;
   padding: 10px 40px;
+}
+
+button:hover {
+  background-color: #48583a;
+}
+
+button:active {
+  transform: scale(1.03);
 }
 
 .action p {
@@ -194,4 +222,102 @@ button {
   color: #596D48;
   text-decoration: none;
   font-weight: bold;
+}
+
+.action a:hover {
+  color: #2e3825;
+}
+
+.action a:active {
+  text-shadow: 1px 1px 1px #000;
+}
+
+@media only screen and (max-width: 810px) {
+  main section, .action {
+    padding: 0 5%;
+    align-items: center;
+  }
+
+  .header {
+    text-align: center;
+    font-weight: normal;
+    font-size: 1.3rem;
+  }
+
+  .form {
+    gap: 2rem;
+    min-height: 420px;
+    margin-top: -1rem;
+  }
+
+  form ul {
+    gap: 5%;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  body {
+    flex-direction: column;
+  }
+
+  aside {
+    max-height: 160px;
+    flex: 0;
+    position: relative;
+  }
+
+  main section {
+    flex: 0;
+  }
+
+  .logo {
+    margin: 0;
+    height: 160px;
+  }
+
+  .logo img {
+    height: 80px;
+  }
+
+  footer {
+    position: absolute;
+    bottom: 5px;
+  }
+
+  .header {
+    padding: 20px;
+  }
+
+  .header > p:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .form {
+    min-height: 500px;
+    gap: 0;
+    margin: 0;
+    padding: 15px 0 25px 0;
+    justify-content: space-between;
+  }
+
+  form {
+    height: 410px;
+  }
+
+  form ul {
+    grid-template-columns: 1fr;
+  }
+
+  .action {
+    min-height: 110px;
+    justify-content: center;
+  }
+
+  .action p {
+    margin-top: 10px;
+  }
 }
