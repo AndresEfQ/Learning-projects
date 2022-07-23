@@ -99,12 +99,14 @@ pwd.addEventListener('change', () => {
 
 showPwd.addEventListener('click', () => {
   pwd.type = 'text';
+  pwd.focus();
   showPwd.style.display = 'none';
   hidePwd.style.display = 'block';
 });
 
 showConf.addEventListener('click', () => {
   confPwd.type = 'text';
+  confPwd.focus();
   showConf.style.display = 'none';
   hideConf.style.display = 'block';
 });
@@ -120,6 +122,7 @@ hidePwd.addEventListener('click', () => {
 
 hideConf.addEventListener('click', () => {
   confPwd.type = 'password';
+  confPwd.focus();
   showConf.style.display = 'block';
   hideConf.style.display = 'none';
 });
