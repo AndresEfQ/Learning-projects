@@ -9,8 +9,12 @@ const form = document.querySelector('form');
 const email = document.getElementById('mail');
 const phone = document.getElementById('phone');
 const pwd = document.getElementById('pwd');
-const confirmPwd = document.getElementById('confirm');
+const confPwd = document.getElementById('confirm');
 const button = document.querySelector('button');
+const showPwd = document.querySelector('.show-pwd');
+const showConf = document.querySelector('.show-conf');
+const hidePwd = document.querySelector('.hide-pwd');
+const hideConf = document.querySelector('.hide-conf');
 
 // Prevent submission when at least one invalid input. It's needed because of novalidate form
 
@@ -67,26 +71,55 @@ phone.addEventListener('input', (e) => {
 
 // Checks if the password and password confirmation match. Lazy for password, eager for confirmation
 
-confirmPwd.addEventListener('input', () => {
-  if (confirmPwd.value) {
+confPwd.addEventListener('input', () => {
+  if (confPwd.value) {
 
-    if (pwd.value !== confirmPwd.value) {
+    if (pwd.value !== confPwd.value) {
       pwd.nextElementSibling.nextElementSibling.classList.add('visible');
     } 
-    if (pwd.value === confirmPwd.value) {
+    if (pwd.value === confPwd.value) {
       pwd.nextElementSibling.nextElementSibling.classList.remove('visible');
     }
   }
 });
 
 pwd.addEventListener('change', () => {
-  if (confirmPwd.value) {
+  if (confPwd.value) {
 
-    if (pwd.value !== confirmPwd.value) {
+    if (pwd.value !== confPwd.value) {
       pwd.nextElementSibling.nextElementSibling.classList.add('visible');
     } 
-    if (pwd.value === confirmPwd.value) {
+    if (pwd.value === confPwd.value) {
       pwd.nextElementSibling.nextElementSibling.classList.remove('visible');
     }
   }
+});
+
+// Show password
+
+showPwd.addEventListener('click', () => {
+  pwd.type = 'text';
+  showPwd.style.display = 'none';
+  hidePwd.style.display = 'block';
+});
+
+showConf.addEventListener('click', () => {
+  confPwd.type = 'text';
+  showConf.style.display = 'none';
+  hideConf.style.display = 'block';
+});
+
+// Hide passwords
+
+hidePwd.addEventListener('click', () => {
+  pwd.type = 'password';
+  pwd.focus();
+  showPwd.style.display = 'block';
+  hidePwd.style.display = 'none';
+});
+
+hideConf.addEventListener('click', () => {
+  confPwd.type = 'password';
+  showConf.style.display = 'block';
+  hideConf.style.display = 'none';
 });
