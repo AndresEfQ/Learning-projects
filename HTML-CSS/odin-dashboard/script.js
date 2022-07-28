@@ -1,0 +1,1 @@
+import { mdiMagnify } from '@mdi/js';
