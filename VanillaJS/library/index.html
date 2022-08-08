@@ -7,11 +7,62 @@
   <title>Library</title>
   <link rel="stylesheet" href="./style.css">
   <script src="./script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 </head>
 <body>
-  <header></header>
-  <aside></aside>
-  <main></main>
-  <footer></footer>
+  <div class="inactive hidden"></div>
+  <header>
+    <div class="container">
+      <h1>Library</h1>
+      <button type="button" class="header-button">Log in</button>
+    </div>
+  </header>
+  <main>
+    <div class="book">
+      <h2>Piense y hagase rico</h2>
+      <p>By: <span>Napoleon Hill</span></p>
+      <p>Language: <span>Español</span></p>
+      <p><span>350</span> pages</p>
+      <div class="controls">
+        <button type="button">Not read</button>
+        <button type="button">Remove</button>
+      </div>
+    </div>
+    <div class="add-book">+</div>
+  </main>
+  <footer>
+    Copyright © 2022 andresEfQ <a href="https://github.com/AndresEfQ"><img src="./images/github" alt="github"></a>
+  </footer>
+  <div class="overlay hidden">
+    <form action="#" method="get" id="add-new-book">
+      <h2>Add new book</h2>
+      <ul>
+        <li>
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required>
+        </li>
+        <li>
+          <label for="author">Author</label>
+          <input type="text" id="author" name="author" required>
+        </li>
+        <li>
+          <label for="language">Language</label>
+          <input type="text" id="language" name="language" required>
+        </li>
+        <li>
+          <label for="pages">Pages</label>
+          <input type="number" id="pages" name="pages" required>
+        </li>
+        <li>
+          <input type="checkbox" id="read" name="read" required>
+          <label for="read">Read</label>
+        </li>
+        <button type="submit" id="add" form="add-new-book">Add</button>
+      </ul>
+
+    </form>
+  </div>
 </body>
 </html>
