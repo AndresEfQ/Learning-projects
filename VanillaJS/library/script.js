@@ -25,13 +25,15 @@ inactive.addEventListener('click', hideOverlay);
 
 addBook.addEventListener('submit', (e) => {
   e.preventDefault();
-/*   console.log(e.target) */
   let newBook = new Book(title.value, author.value, language.value, pages.value, isRead.checked);
-/*   localStorage.setItem(title.value, JSON.stringify(newBook));
-  library.push(newBook); */
   newBook.render();
   hideOverlay();
-})
+  title.value = ''
+  author.value = ''
+  language.value = ''
+  pages.value = ''
+  isRead.checked = false
+});
 
 class Book {
   constructor(title, author, language, pages, isRead) {
@@ -45,7 +47,7 @@ class Book {
   render = function() {
     console.log(this);
     const thisBook = document.createElement('div');
-    thisBook.classList.add('Book');
+    thisBook.classList.add('book');
     
     const title = document.createElement('h2');
     title.innerText = this.title;
@@ -68,6 +70,7 @@ class Book {
     
     const read = document.createElement('button');
     read.innerText = this.isRead ? 'Read' : 'Not read';
+    read.classList = this.isRead ? 'read' : '';
     read.addEventListener('click', this.toggleRead);
     controls.appendChild(read);
     
@@ -82,11 +85,22 @@ class Book {
   }
   
   toggleRead = function() {
-    console.log('change read status'); // TODO write function
+    console.log(this.innerText);
+    if (this.innerText == 'Read') {
+      this.classList.remove('read');
+      this.innerText = 'Not read';
+      console.log('enters here');
+      return;
+    }
+    if (this.innerText == 'Not read'){
+      this.classList.add('read');
+      this.innerText = 'Read';
+      return;
+    }
   }
   
   removeBook = function() {
-    console.log('Remove book'); // TODO write function
+    main.removeChild(this.parentNode.parentNode);
   }
   
 }

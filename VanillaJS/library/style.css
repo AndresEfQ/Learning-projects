@@ -91,6 +91,10 @@ h2 {
   border-radius: 10px;
 }
 
+button.read {
+  background-color: #007f5f;
+}
+
 .controls > button:hover, .overlay button:hover {
   transform: scale(1.05);
   cursor: pointer;
@@ -164,7 +168,9 @@ li:nth-last-child(2) {
 }
 
 input {
-  height: 25px;
+  padding: 5px;
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
 }
 
 input:focus {
