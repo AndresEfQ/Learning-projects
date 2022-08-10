@@ -37,8 +37,13 @@ header button:hover {
   cursor: pointer;
 }
 
+main {
+  background-color: #f1faee;
+}
+
 .container {
   margin: 0 auto;
+  padding: 50px 20px;
   display: flex;
   flex: 1;
   flex-direction: row;
@@ -47,25 +52,40 @@ header button:hover {
   max-width: 1200px;
 }
 
-main {
+.grid {
+  width: 100%;
   background: #f1faee;
-  padding: 50px 350px 20px 350px;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 30px;
 }
 
-main > div {
+.book, .add-book {
   color: #1d3557;
   height: 330px;
+  min-width: 270px;
   border: 1px solid black;
   border-radius: 30px;
-  border: 5px solid #457b9d;
+  border: 4px solid #1d3557;
   background-color: #a8dadc;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: 5px 5px 10px #1d3557cc;
+}
+
+.add-book {
+  justify-content: center;
+  align-items: center;
+  font-size: 10rem;
+  line-height: 0;
+  cursor: pointer;
+  padding-bottom: 50px;
+}
+
+.add-book:hover {
+  font-size: 11rem;
 }
 
 h2 {
@@ -98,19 +118,6 @@ button.read {
 .controls > button:hover, .overlay button:hover {
   transform: scale(1.05);
   cursor: pointer;
-}
-
-.add-book {
-  justify-content: center;
-  align-items: center;
-  font-size: 10rem;
-  line-height: 0;
-  cursor: pointer;
-  padding-bottom: 50px;
-}
-
-.add-book:hover {
-  font-size: 11rem;
 }
 
 footer {
@@ -186,4 +193,29 @@ input:focus {
 
 .hidden {
   display: none;
+}
+
+@media only screen and (max-width: 620px) {
+  .book, .add-book {
+    width: 275px;
+  }
+
+  .grid {
+    justify-items: center;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  header {
+    height: min-content;
+    z-index: 2;
+  }
+  .container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .grid {
+    margin-top: 30px;
+  }
 }
