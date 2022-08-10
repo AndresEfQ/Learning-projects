@@ -1,4 +1,4 @@
-const main = document.querySelector('main');
+const grid = document.querySelector('.grid');
 const openAddBook = document.querySelector('.add-book');
 const addBook = document.querySelector('#add-new-book')
 const inactive = document.querySelector('.inactive');
@@ -48,22 +48,28 @@ class Book {
     console.log(this);
     const thisBook = document.createElement('div');
     thisBook.classList.add('book');
+
+    const bookInner = document.createElement('div');
+    bookInner.classList.add('book-inner');
+    
+    const bookFront = document.createElement('div');
+    bookFront.classList.add('book-front');
     
     const title = document.createElement('h2');
     title.innerText = this.title;
-    thisBook.appendChild(title);
+    bookFront.appendChild(title);
     
     const author = document.createElement('p');
     author.innerText = `By: ${this.author}`;
-    thisBook.appendChild(author);
+    bookFront.appendChild(author);
     
     const language = document.createElement('p');
     language.innerText = `Language: ${this.language}`;
-    thisBook.appendChild(language);
+    bookFront.appendChild(language);
     
     const pages = document.createElement('p');
     pages.innerText = `${this.pages} pages`;
-    thisBook.appendChild(pages);
+    bookFront.appendChild(pages);
     
     const controls = document.createElement('div');
     controls.classList.add('controls');
@@ -79,9 +85,23 @@ class Book {
     remove.addEventListener('click', this.removeBook);
     controls.appendChild(remove);
     
-    thisBook.appendChild(controls);
-
-    main.insertBefore(thisBook, openAddBook);
+    bookFront.appendChild(controls);
+    bookInner.appendChild(bookFront);
+    
+    const bookBack = document.createElement('div');
+    bookBack.classList.add('book-back');
+    
+    const text = document.createElement('h3');
+    text.innerText = `Are you sure you want to remove ${this.title} by ${this.author}`;
+    bookBack.appendChild(text);
+    
+    const confirmRemove = document.createElement('button');
+    confirmRemove.innerText = 'Remove';
+    bookBack.appendChild(confirmRemove);
+    
+    bookInner.appendChild(bookBack);
+    thisBook.appendChild(bookInner);
+    grid.insertBefore(thisBook, openAddBook);
   }
   
   toggleRead = function() {
@@ -100,7 +120,9 @@ class Book {
   }
   
   removeBook = function() {
-    main.removeChild(this.parentNode.parentNode);
+    console.log(this.parentNode.parentNode.parentNode.parentNode)
+    /* grid.removeChild(this.parentNode.parentNode); */
+    this.parentNode.parentNode.parentNode.parentNode.classList.add('book-flipped');
   }
   
 }
