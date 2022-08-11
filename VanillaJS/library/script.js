@@ -26,7 +26,7 @@ inactive.addEventListener('click', hideOverlay);
 addBook.addEventListener('submit', (e) => {
   e.preventDefault();
   addBookToLibrary(title.value, author.value, language.value, pages.value, isRead.checked);
-  renderBooks;
+  renderBooks();
   hideOverlay();
   title.value = ''
   author.value = ''
@@ -81,6 +81,7 @@ class Book {
     read.innerText = this.isRead ? 'Read' : 'Not read';
     read.classList = this.isRead ? 'read' : '';
     read.classList.add('button');
+    read.dataset.title = `${this.title}`;
     read.addEventListener('click', this.toggleRead);
     controls.appendChild(read);
     
@@ -103,48 +104,46 @@ class Book {
     const confirmRemove = document.createElement('button');
     confirmRemove.innerText = 'Remove';
     confirmRemove.classList.add('button');
+    confirmRemove.dataset.title = `${this.title}`;
     confirmRemove.addEventListener('click', this.confirmRemove);
     bookBack.appendChild(confirmRemove);
     
     bookInner.appendChild(bookBack);
     thisBook.appendChild(bookInner);
-    grid.insertBefore(thisBook, openAddBook);
+    grid.appendChild(thisBook);
   }
   
   toggleRead = function() {
-    if (this.innerText == 'Read') {
-      this.classList.remove('read');
-      this.innerText = 'Not read';
-      return;
-    }
-    if (this.innerText == 'Not read'){
-      this.classList.add('read');
-      this.innerText = 'Read';
-      return;
-    }
+    const currentBook = myLibrary.find((book) => book.title == this.dataset.title);
+    currentBook.isRead = currentBook.isRead ? false : true;
+    renderBooks();
   }
   
-  removeBook = function(e) {
-    this.parentNode.parentNode.parentNode.parentNode.classList.add('book-flipped');
-    this.parentNode.parentNode.parentNode.focus();
+  removeBook = function() {
+    this.parentNode.parentNode.parentNode.parentNode.classList.add('book-flipped'); //book
+    this.parentNode.parentNode.parentNode.focus(); //inner-book
   }
   
   confirmRemove = function() {
-    grid.removeChild(this.parentNode.parentNode.parentNode)
+    /* grid.removeChild(this.parentNode.parentNode.parentNode) //book */
+    myLibrary = myLibrary.filter((book) => book.title != this.dataset.title);
+    renderBooks();
   }
 }
 
 function addBookToLibrary(title, author, language, pages, isRead) {
   const newBook = new Book(title, author, language, pages, isRead)
-  myLibrary.push(newBook)
+  myLibrary.push(newBook);
 }
 
 function renderBooks() {
+  grid.innerHTML = ''
   myLibrary.forEach((book) => book.render());
+  grid.appendChild(openAddBook);
 }
 
 // Sample book
 const sampleBook = new Book('Piense y hagase rico', 'Napleon Hill', 'Español', '263', false);
-sampleBook.render();
 
 myLibrary.push(sampleBook);
+renderBooks();
