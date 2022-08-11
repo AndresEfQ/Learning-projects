@@ -25,8 +25,8 @@ inactive.addEventListener('click', hideOverlay);
 
 addBook.addEventListener('submit', (e) => {
   e.preventDefault();
-  let newBook = new Book(title.value, author.value, language.value, pages.value, isRead.checked);
-  newBook.render();
+  addBookToLibrary(title.value, author.value, language.value, pages.value, isRead.checked);
+  renderBooks;
   hideOverlay();
   title.value = ''
   author.value = ''
@@ -35,6 +35,7 @@ addBook.addEventListener('submit', (e) => {
   isRead.checked = false
 });
 
+let myLibrary = []
 
 class Book {
   constructor(title, author, language, pages, isRead) {
@@ -133,6 +134,17 @@ class Book {
   }
 }
 
+function addBookToLibrary(title, author, language, pages, isRead) {
+  const newBook = new Book(title, author, language, pages, isRead)
+  myLibrary.push(newBook)
+}
+
+function renderBooks() {
+  myLibrary.forEach((book) => book.render());
+}
+
 // Sample book
 const sampleBook = new Book('Piense y hagase rico', 'Napleon Hill', 'Español', '263', false);
 sampleBook.render();
+
+myLibrary.push(sampleBook);
