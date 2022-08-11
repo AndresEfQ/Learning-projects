@@ -23,20 +23,20 @@
     <div class="container">
       <div class="grid">
         <div class="book">
-          <div class="book-inner">
+          <div class="book-inner" tabindex='0'>
             <div class="book-front">
               <h2>Piense y hagase rico</h2>
               <p>By: <span>Napoleon Hill</span></p>
               <p>Language: <span>Español</span></p>
               <p><span>350</span> pages</p>
               <div class="controls">
-                <button type="button" class="read">Read</button>
-                <button type="button">Remove</button>
+                <button type="button" class="button read">Read</button>
+                <button type="button" class="button">Remove</button>
               </div>
             </div>
             <div class="book-back">
-              <h3>Are you sure you want to delete Piense y hagase rico by Napoleon Hill</h3>
-              <button>Remove</button>
+              <h2>Are you sure you want to delete Piense y hagase rico by Napoleon Hill</h2>
+              <button class="button">Remove</button>
             </div>
           </div>
         </div>
@@ -71,7 +71,7 @@
           <input type="checkbox" id="read" name="read">
           <label for="read">Read</label>
         </li>
-        <button type="submit" id="add" form="add-new-book">Add</button>
+        <button type="submit" id="add" class="button" form="add-new-book">Add</button>
       </ul>
 
     </form>
