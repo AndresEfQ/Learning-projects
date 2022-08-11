@@ -112,8 +112,15 @@ main {
 
 .book-back {
   color: #f1faee;
+  text-align: center;
   background-color: #457b9d;
   transform: rotateY(180deg);
+  border-radius: 30px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  box-shadow: 5px 5px 10px #1d3557cc;
 }
 
 /* flip cards */
@@ -148,7 +155,7 @@ h2 {
   gap: 20px;
 }
 
-.controls > button, .overlay button {
+.button {
   flex: 1;
   background-color: #e63946;
   color: #fff;
@@ -156,16 +163,17 @@ h2 {
   font-size: 1rem;
   font-weight: 700;
   min-width: 100px;
+  max-height: 36px;
   padding: 10px 0;
   border: none;
   border-radius: 10px;
 }
 
-button.read {
+.button.read {
   background-color: #007f5f;
 }
 
-.controls > button:hover, .overlay button:hover {
+.button:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
