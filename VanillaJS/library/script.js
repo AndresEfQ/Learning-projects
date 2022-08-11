@@ -50,6 +50,8 @@ class Book {
     thisBook.classList.add('book');
 
     const bookInner = document.createElement('div');
+    bookInner.tabIndex = '0';
+    bookInner.addEventListener('blur', function() {this.parentNode.classList.remove('book-flipped')})
     bookInner.classList.add('book-inner');
     
     const bookFront = document.createElement('div');
@@ -77,11 +79,13 @@ class Book {
     const read = document.createElement('button');
     read.innerText = this.isRead ? 'Read' : 'Not read';
     read.classList = this.isRead ? 'read' : '';
+    read.classList.add('button');
     read.addEventListener('click', this.toggleRead);
     controls.appendChild(read);
     
     const remove = document.createElement('button');
     remove.innerText = 'Remove';
+    remove.classList.add('button');
     remove.addEventListener('click', this.removeBook);
     controls.appendChild(remove);
     
@@ -91,12 +95,14 @@ class Book {
     const bookBack = document.createElement('div');
     bookBack.classList.add('book-back');
     
-    const text = document.createElement('h3');
-    text.innerText = `Are you sure you want to remove ${this.title} by ${this.author}`;
+    const text = document.createElement('h2');
+    text.innerText = `Are you sure you want to remove ${this.title} by ${this.author}?`;
     bookBack.appendChild(text);
     
     const confirmRemove = document.createElement('button');
     confirmRemove.innerText = 'Remove';
+    confirmRemove.classList.add('button');
+    confirmRemove.addEventListener('click', this.confirmRemove);
     bookBack.appendChild(confirmRemove);
     
     bookInner.appendChild(bookBack);
@@ -105,11 +111,9 @@ class Book {
   }
   
   toggleRead = function() {
-    console.log(this.innerText);
     if (this.innerText == 'Read') {
       this.classList.remove('read');
       this.innerText = 'Not read';
-      console.log('enters here');
       return;
     }
     if (this.innerText == 'Not read'){
@@ -119,10 +123,16 @@ class Book {
     }
   }
   
-  removeBook = function() {
-    console.log(this.parentNode.parentNode.parentNode.parentNode)
+  removeBook = function(e) {
+    console.log(e.target);
     /* grid.removeChild(this.parentNode.parentNode); */
     this.parentNode.parentNode.parentNode.parentNode.classList.add('book-flipped');
+    this.parentNode.parentNode.parentNode.focus();
+    console.log(this.parentNode.parentNode.parentNode);
   }
-  
+
+  confirmRemove = function() {
+    console.log(this.parentNode.parentNode.parentNode);
+    grid.removeChild(this.parentNode.parentNode.parentNode)
+  }
 }
