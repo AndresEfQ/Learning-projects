@@ -35,6 +35,7 @@ addBook.addEventListener('submit', (e) => {
   isRead.checked = false
 });
 
+
 class Book {
   constructor(title, author, language, pages, isRead) {
     this.title = title;
@@ -43,12 +44,11 @@ class Book {
     this.pages = pages;
     this.isRead = isRead;
   }
-
+  
   render = function() {
-    console.log(this);
     const thisBook = document.createElement('div');
     thisBook.classList.add('book');
-
+    
     const bookInner = document.createElement('div');
     bookInner.tabIndex = '0';
     bookInner.addEventListener('blur', function() {this.parentNode.classList.remove('book-flipped')})
@@ -124,15 +124,15 @@ class Book {
   }
   
   removeBook = function(e) {
-    console.log(e.target);
-    /* grid.removeChild(this.parentNode.parentNode); */
     this.parentNode.parentNode.parentNode.parentNode.classList.add('book-flipped');
     this.parentNode.parentNode.parentNode.focus();
-    console.log(this.parentNode.parentNode.parentNode);
   }
-
+  
   confirmRemove = function() {
-    console.log(this.parentNode.parentNode.parentNode);
     grid.removeChild(this.parentNode.parentNode.parentNode)
   }
 }
+
+// Sample book
+const sampleBook = new Book('Piense y hagase rico', 'Napleon Hill', 'Español', '263', false);
+sampleBook.render();
