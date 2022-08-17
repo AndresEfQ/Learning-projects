@@ -1,7 +1,6 @@
 const grid = document.querySelector('.grid');
 const openAddBook = document.querySelector('.add-book');
 const addBook = document.querySelector('#add-new-book')
-const inactive = document.querySelector('.inactive');
 const hidden = document.querySelectorAll('.hidden');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
@@ -9,30 +8,15 @@ const language = document.querySelector('#language');
 const pages = document.querySelector('#pages');
 const isRead = document.querySelector('#read');
 
-function hideOverlay() {
-  for (let element of hidden) {
-    element.classList.add('hidden');
-  }
-}
-
-openAddBook.addEventListener('click', () => {
-  for (let element of hidden) {
-    element.classList.remove('hidden');
-  }
-});
-
-inactive.addEventListener('click', hideOverlay);
-
 addBook.addEventListener('submit', (e) => {
   e.preventDefault();
   addBookToLibrary(title.value, author.value, language.value, pages.value, isRead.checked);
-  renderBooks();
-  hideOverlay();
   title.value = ''
   author.value = ''
   language.value = ''
   pages.value = ''
   isRead.checked = false
+  renderBooks();
 });
 
 let myLibrary = []
@@ -49,9 +33,11 @@ class Book {
   render = function() {
     const thisBook = document.createElement('div');
     thisBook.classList.add('book');
+    thisBook.dataset.title = `${this.title}-book`;
     
     const bookInner = document.createElement('div');
     bookInner.tabIndex = '0';
+    bookInner.dataset.title = `${this.title}-inner`;
     bookInner.addEventListener('blur', function() {this.parentNode.classList.remove('book-flipped')})
     bookInner.classList.add('book-inner');
     
@@ -88,6 +74,7 @@ class Book {
     const remove = document.createElement('button');
     remove.innerText = 'Remove';
     remove.classList.add('button');
+    remove.dataset.title = `${this.title}`;
     remove.addEventListener('click', this.removeBook);
     controls.appendChild(remove);
     
@@ -120,12 +107,11 @@ class Book {
   }
   
   removeBook = function() {
-    this.parentNode.parentNode.parentNode.parentNode.classList.add('book-flipped'); //book
-    this.parentNode.parentNode.parentNode.focus(); //inner-book
+    document.querySelector(`[data-title="${this.dataset.title}-book"]`).classList.add('book-flipped');
+    document.querySelector(`[data-title="${this.dataset.title}-inner"]`).focus();
   }
   
   confirmRemove = function() {
-    /* grid.removeChild(this.parentNode.parentNode.parentNode) //book */
     myLibrary = myLibrary.filter((book) => book.title != this.dataset.title);
     renderBooks();
   }
