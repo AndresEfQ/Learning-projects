@@ -4,11 +4,68 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Tic Tac Toe</title>
   <link rel="stylesheet" href="./style.css">
   <script src="./script.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=Permanent+Marker&display=swap" rel="stylesheet">
 </head>
 <body>
-  <p>hello world</p>
+  <header>
+    <div class="container">
+      <h1>TIC TAC TOE</h1>
+    </div>
+  </header>
+  <main>
+    <div class="container">
+      <div class="configuration">
+        <form action="#" method="get" id="configuration">
+          <ul>
+            <li>
+              <label for="game-mode">Please select a Game Mode</label>
+              <select name="game-mode" id="game-mode">
+                <option value="single">Player Vs Computer</option>
+                <option value="multi">Player Vs Player</option>
+              </select>
+            </li>
+            <li>
+              <label for="difficulty">Please select a Difficulty</label>
+              <select name="difficulty" id="difficulty">
+                <option value="eassy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+                <option value="extreme">Extreme</option>
+              </select>
+            </li>
+            <li>
+              <button type="button" id="play">PLAY</button>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <div class="player-names">
+        <textarea id="player1">player 1</textarea>
+        <img src="./images/vs.png" alt="VS" height="100px">
+        <textarea id="player2">player 2</textarea>
+        <h3 class="animate-character">test player</h3>
+      </div>
+      <div class="gameboard">
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+        <div class="box"></div>
+      </div>
+      <button type="button" id="reset">RESET</button>
+    </div>
+  </main>
+  <footer>
+    Copyright © 2022<a href="https://github.com/AndresEfQ">andresEfQ<img src="./images/github" alt="github"></a>
+  </footer>
 </body>
 </html>
