@@ -1,12 +1,9 @@
 const gameBoard = (() => {
   let board = new Array(9);
   let mark = 'X'
-  board = [
-    "X","O","O",
-    "X","X","X",
-    "X","X","X"
-  ];
+
   const showMove = (e) => {
+    if (e.target.textContent) return;
     console.log(mark);
     gameBoard.board[e.target.dataset['index']] = mark;
     e.target.textContent = mark;
@@ -17,6 +14,16 @@ const gameBoard = (() => {
     }
     mark = mark == "X" ? "O" : "X";
   }
+  const checkWinner = () => {
+    const lines = [[0,1,2],[3,4,5],[6,7,8],
+                   [0,3,6],[1,4,7],[2,5,8],
+                   [0,4,8],[2,4,6]]
+    lines.some((line) => {
+      line.every((box) => {
+        gameBoard.board[box]
+      })
+    })
+  }
 
   return {
     board,
@@ -24,7 +31,7 @@ const gameBoard = (() => {
   };
 })();
 
-const player = (name, mark, isActive) => {
+/* const player = (name, mark, isActive) => {
   const makeMove = (e) => {
     gameBoard.board[e.target.dataset['index']] = mark;
   }
@@ -68,24 +75,30 @@ const ia = () => {
     "case",
     "kipp"
   ];
-}
+} */
 
 const displayController = (() => {
-  
+  const player1Name = document.getElementById('player1');
+  const player2Name = document.getElementById('player2');
   const hideConfig = () => {
     document.querySelector(".configuration").style.display = "none";
   }
   const startGame = () => {
     hideConfig();
   }
- /*  const showMove = (e, mark) => {
-    e.target.textContent = mark;
-  } */
+  const toogleActivePlayer = () => {
+    if (player1Name.classList == "animate-character") {
+      player1Name.classList.remove("animate-character");
+      player2Name.classList.add("animate-character");
+    } else {
+      player2Name.classList.remove("animate-character");
+      player1Name.classList.add("animate-character");
+    }
+  }
 
   return {
     startGame,
-/*     player1,
-    player2 */
+    toogleActivePlayer
   };
 })();
 
@@ -94,4 +107,7 @@ Array.from(
   forEach((el) => el.addEventListener("click", displayController.startGame)
 );
 
-document.querySelector(".gameboard").addEventListener("click", gameBoard.showMove);
+document.querySelector(".gameboard").addEventListener("click", (e) => {
+  gameBoard.showMove(e);
+  displayController.toogleActivePlayer();
+});
