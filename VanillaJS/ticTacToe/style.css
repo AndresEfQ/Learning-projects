@@ -49,7 +49,7 @@ main {
 .configuration {
   position: absolute;
   display: flex;
-  display: none;
+  /* display: none; */
   align-items: center;
   justify-content: center;
   height: 78vh;
@@ -90,21 +90,22 @@ button {
 .player-names {
   display: flex;
   align-items: center;
+  justify-content: stretch;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .player-names > textarea {
   font-family: 'Permanent Marker', cursive;
-  font-size: 1.6rem;
+  font-size: 8vw;
+  max-width: 250px;
   color: var(--dark-grey);
-  width: 110px;
   text-align: center;
   border: none;
   border-radius: 5px;
   background-color: var(--light-grey);
+  flex: 1;
   resize: none;
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* overflow: hidden; */
 }
 
 .player-names > textarea:focus {
@@ -150,6 +151,22 @@ button {
 .box {
   border: 3px solid var(--grey);
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 7vh;
+}
+
+.red-color {
+  color: var(--red);
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 5%;
 }
 
 footer, a {
@@ -175,5 +192,15 @@ footer img {
 @media only screen and (min-width: 450px) {
   header {
     font-size: 2rem;
+  }
+
+  .player-names > textarea {
+    font-size: 2.2rem;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .player-names {
+    justify-content: center;
   }
 }
