@@ -92,13 +92,14 @@ button {
   align-items: center;
   justify-content: stretch;
   width: 100%;
-  margin: 0 auto;
+  /* margin: 0 auto; */
 }
 
 .player-names > textarea {
   font-family: 'Permanent Marker', cursive;
   font-size: 8vw;
   max-width: 250px;
+  height: min-content;
   color: var(--dark-grey);
   text-align: center;
   border: none;
@@ -106,6 +107,10 @@ button {
   background-color: var(--light-grey);
   flex: 1;
   resize: none;
+}
+
+textarea > div {
+  margin: auto 0;
 }
 
 .player-names > textarea:focus {
@@ -132,7 +137,6 @@ button {
   animation: textclip 2s linear infinite;
   display: inline-block;
   font-family: 'Permanent Marker', cursive;
-      /* font-size: 190px; */
 }
 
 @keyframes textclip {
@@ -196,6 +200,9 @@ footer img {
 
   .player-names > textarea {
     font-size: 2.2rem;
+  }
+  .player-names > .animate-character {
+    font-size: 2.5rem;
   }
 }
 
