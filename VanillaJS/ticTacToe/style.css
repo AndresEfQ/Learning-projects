@@ -15,12 +15,12 @@
 }
 
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Permanent Marker', cursive;
 }
 
 header {
   font-size: 7vw;
-  font-family: 'Permanent Marker', cursive;
+  /* font-family: 'Permanent Marker', cursive; */
   height: 15vh;
 }
 
@@ -49,7 +49,6 @@ main {
 .configuration {
   position: absolute;
   display: flex;
-  /* display: none; */
   align-items: center;
   justify-content: center;
   height: 78vh;
@@ -80,7 +79,7 @@ button {
   color: var(--light-grey);
   background: var(--grey-gradient);
   border: none;
-  font-family: 'Permanent Marker', cursive;
+  font-family: inherit;
   font-size: large;
   border-radius: 5px;
   padding: 5px 20px;
@@ -88,15 +87,15 @@ button {
 }
 
 .player-names {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: stretch;
   width: 100%;
-  /* margin: 0 auto; */
 }
 
-.player-names > textarea {
-  font-family: 'Permanent Marker', cursive;
+.player-names textarea {
+  font-family: inherit;
   font-size: 8vw;
   max-width: 250px;
   height: min-content;
@@ -109,13 +108,23 @@ button {
   resize: none;
 }
 
-textarea > div {
-  margin: auto 0;
-}
-
-.player-names > textarea:focus {
+.player-names textarea:focus {
   outline: 2px solid var(--red);
   background-color: white;
+}
+
+#edit1 {
+  height: 30px;
+  position: absolute;
+  left: 25%;
+  transform: translate(50%);
+}
+
+#edit2 {
+  height: 30px;
+  position: absolute;
+  right: 25%;
+  transform: translate(-50%);
 }
 
 .animate-character {
@@ -125,8 +134,8 @@ textarea > div {
     var(--red) 50%,
     var(--grey) 67%,
     var(--dark-grey) 100%
-  );
-  background-size: auto auto;
+    );
+    background-size: auto auto;
   background-clip: border-box;
   background-size: 200% auto;
   color: #fff;
@@ -136,13 +145,43 @@ textarea > div {
   -webkit-text-fill-color: transparent;
   animation: textclip 2s linear infinite;
   display: inline-block;
-  font-family: 'Permanent Marker', cursive;
+  /* font-family: 'Permanent Marker', cursive; */
 }
 
 @keyframes textclip {
   to {
     background-position: -200% center;
   }
+}
+
+.name {
+  position: relative;
+}
+
+textarea + img {
+  display: none;
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+div:hover > textarea + img {
+  display: block;
+}
+
+#winner {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  background-color: var(--light-grey);
+  font-family: 'DynaPuff', sans-serif;
+  font-size: 2rem;
 }
 
 .gameboard {
@@ -158,7 +197,7 @@ textarea > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Permanent Marker', cursive;
+  /* font-family: 'Permanent Marker', cursive; */
   font-size: 7vh;
 }
 
@@ -180,6 +219,7 @@ footer, a {
   justify-content: center;
   align-items: center;
   color: var(--light-grey);
+  font-family: 'Inter', sans-serif;
 }
 
 a {
@@ -198,10 +238,10 @@ footer img {
     font-size: 2rem;
   }
 
-  .player-names > textarea {
+  .player-names textarea {
     font-size: 2.2rem;
   }
-  .player-names > .animate-character {
+  .player-names .animate-character {
     font-size: 2.5rem;
   }
 }
