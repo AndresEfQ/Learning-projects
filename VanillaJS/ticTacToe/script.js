@@ -1,4 +1,4 @@
-const gameBoard = (() => {
+/* const gameBoard = (() => {
   const winnerMessage = document.getElementById('winner-message');
   const winnerDiv = document.getElementById('winner');
   const screen = Array.from(document.getElementsByClassName('box'));
@@ -145,4 +145,91 @@ Array.from(
     controler.startGame();
     controler.setMode();
   })
-);
+); */
+
+const gameBoard = (() => {
+  let board = new Array(9).fill(null);
+  const checkWinner = () => {
+
+  }
+  const checkTie = () => {
+
+  }
+  const setMove = () => {
+
+  }
+  return {
+
+  }
+})();
+
+const displayController = (() => {
+  let mode;
+  let difficulty;
+  let player1;
+  let player2;
+
+  const startGame = () => {
+    mode = document.getElementById('game-mode').value;
+    difficulty = document.getElementById('difficulty').value;
+    document.querySelector(".configuration").style.display = "none";
+    player1 = player('player1', 'player1', 'human', 'X');
+    let player2Type = mode == 'single' ? 'ia' : 'human';
+    console.log(getDifficulty());
+    player2 = player('player2', 'player2', player2Type, 'O', difficulty);
+  }
+  const assignTurn = () => {
+
+  }
+  const getPlayer2 = () => {
+    return player2;
+  }
+  const getPlayer1 = () => {
+    return player1;
+  }
+  const getDifficulty = () => {
+    return difficulty
+  }
+  return {
+    startGame,
+    getPlayer2,
+    getPlayer1,
+    getDifficulty
+  }
+})();
+
+const human = () => {
+  const play = () => {
+    console.log('human playing')
+  }
+  return {play};
+}
+
+const ia = (difficulty) => {
+  let play
+
+  switch (difficulty) {
+    case 'easy':
+      play = () => {console.log('ia is playing easy')};
+      break;
+    case 'extreme':
+      play = () => {console.log('ia is playing extreme')};
+      break;
+  }
+  return {play};
+} //not working as espected
+
+const player = (id, name, type, mark, difficulty) => {
+  const {play} = type == 'ia' ? ia(difficulty) : human();
+
+  return {
+    play,
+    id,
+    name,
+    type,
+    mark,
+    difficulty
+  }
+};
+
+document.querySelector('.play').addEventListener('click', displayController.startGame);
