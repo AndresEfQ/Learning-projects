@@ -2,8 +2,8 @@
   --dark-grey: #141311;
   --grey: #222021bb;
   --light-grey: #edf2f4;
-  --red: #ca2542;
-  --dark-red: #90191f;
+  --red: #fb0025;
+  --dark-red: #990022;
   --grey-gradient: linear-gradient(to left, var(--grey), var(--dark-grey));
   --red-gradient: linear-gradient(to left, var(--dark-red), var(--red)); 
 }
@@ -20,7 +20,6 @@ html {
 
 header {
   font-size: 7vw;
-  /* font-family: 'Permanent Marker', cursive; */
   height: 15vh;
 }
 
@@ -49,30 +48,54 @@ main {
 .configuration {
   position: absolute;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   height: 78vh;
   width: 100%;
   z-index: 2;
   background-color: var(--light-grey);
 }
 
-.configuration ul, .configuration form {
-  height: 100%;
-}
-
-.configuration ul {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: column;
-}
-
-.configuration li {
+.configuration div {
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+.configuration div div {
+  flex-direction: row;
+}
+
+.game-option {
+  display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  margin: 10px;
+}
+
+.game-option img {
+  height: 200px;
+  width: 200px;
+  border-radius: 10px;
+}
+
+.game-option > h4 {
+  display: none;
+  position: absolute;
+  text-align: center;
+  color: var(--light-grey);
+  font-size: 2rem;
+  text-shadow: 2px 2px 2px var(--dark-grey);
+  cursor: default;
+}
+
+.game-option:hover {
+  opacity: 0.8;
+}
+
+.game-option:hover > h4 {
+  display: block;
 }
 
 button {
@@ -193,7 +216,6 @@ div:hover > textarea + img {
 
 .box {
   border: 3px solid var(--grey);
-  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,7 +223,7 @@ div:hover > textarea + img {
   font-size: 7vh;
 }
 
-.red-color {
+.red {
   color: var(--red);
 }
 
