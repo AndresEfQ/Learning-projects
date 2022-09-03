@@ -149,7 +149,7 @@ Array.from(
 
 const gameBoard = (() => {
   let board = new Array(9).fill(null);
-  let emptyBoxes;
+  //let emptyBoxes;
   const winnerMessage = document.getElementById('winner-message');
   const winnerDiv = document.getElementById('winner');
   const displayBoxes = Array.from(document.getElementsByClassName('box'));
@@ -169,35 +169,38 @@ const gameBoard = (() => {
     } else if (checkTie(board)) {
       message = `It's a tie`;
     } else {
-      return;
+      return false;
     }
     winnerMessage.textContent = message;
     winnerDiv.style.display = 'flex';
+    return true;
   } 
   const move = (player, index) => {
     if (board[index]) return;
     board[index] = player.mark;
-    emptyBoxes = board.reduce((prev, curr, currIndex) => {
+    /*emptyBoxes = board.reduce((prev, curr, currIndex) => {
       if (curr == null) {
         prev.push(currIndex);
       }
       return prev;
-    }, []);
+    }, []);*/
     displayBoxes[index].textContent = `${player.mark}`;
     displayBoxes[index].classList = `box ${player.markColor}`;
-    showResult(board, player);
-    displayController.toogleActivePlayer();
+    let gameFinished = showResult(board, player);
+    if (!gameFinished) {
+      displayController.toogleActivePlayer();
+    }
     return true;
   }
-  const getEmptyBoxes = () => {
+  /*const getEmptyBoxes = () => {
     return emptyBoxes;
-  }
+  }*/
   return {
     board,
-    checkWinner,
-    checkTie,
+    // checkWinner,
+    // checkTie,
     move,
-    getEmptyBoxes
+    //getEmptyBoxes
   }
 })();
 
@@ -276,9 +279,14 @@ const ia = (difficulty) => {
   let index;
 
   const easyPlay = function() {
-    let emptyBoxes = gameBoard.getEmptyBoxes();
+    let emptyBoxes = gameBoard.board.reduce((prev, curr, currIndex) => {
+      if (curr == null) {
+        prev.push(currIndex);
+      }
+      return prev;
+    }, []);
     if (emptyBoxes.length == 0) return;
-    console.log(emptyBoxes);
+    console.log({emptyBoxes});
     let random = Math.floor(Math.random()*emptyBoxes.length)
     index = emptyBoxes[random];
     gameBoard.move(this, index);
