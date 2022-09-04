@@ -182,44 +182,59 @@ const ia = (difficulty) => {
   }
 
   const extremePlay = function() {
-    console.log('extreme');
     const board = gameBoard.board;
     const index = bestMove(board, this);
     gameBoard.move(this, index);
   }
   
+    const easyPlay = function() {
+      const emptyBoxes = gameBoard.board.reduce((prev, curr, currIndex) => {
+        if (curr == null) {
+          prev.push(currIndex);
+        }
+        return prev;
+      }, []);
+      const random = Math.floor(Math.random()*emptyBoxes.length)
+      index = emptyBoxes[random];
+      gameBoard.move(this, index);
+    }
+  
   const midPlay = function() {
     let randomPlay = Math.floor(Math.random()*3);
-    console.log(randomPlay);
     if (randomPlay < 2) {
-      easyPlay();
+      const emptyBoxes = gameBoard.board.reduce((prev, curr, currIndex) => {
+        if (curr == null) {
+          prev.push(currIndex);
+        }
+        return prev;
+      }, []);
+      const random = Math.floor(Math.random()*emptyBoxes.length)
+      index = emptyBoxes[random];
+      gameBoard.move(this, index);
     } else {
-      extremePlay();
+      const board = gameBoard.board;
+      const index = bestMove(board, this);
+      gameBoard.move(this, index);
     }
   }
 
   const hardPlay = function() {
     let randomPlay = Math.floor(Math.random()*3);
-    console.log(randomPlay);
     if (randomPlay < 1) {
-      return easyPlay;
+      const emptyBoxes = gameBoard.board.reduce((prev, curr, currIndex) => {
+        if (curr == null) {
+          prev.push(currIndex);
+        }
+        return prev;
+      }, []);
+      const random = Math.floor(Math.random()*emptyBoxes.length)
+      index = emptyBoxes[random];
+      gameBoard.move(this, index);
     } else {
-      return extremePlay;
+      const board = gameBoard.board;
+      const index = bestMove(board, this);
+      gameBoard.move(this, index);
     }
-  }
-
-  const easyPlay = function() {
-    console.log('easy')
-    let emptyBoxes = gameBoard.board.reduce((prev, curr, currIndex) => {
-      if (curr == null) {
-        prev.push(currIndex);
-      }
-      return prev;
-    }, []);
-    if (emptyBoxes.length == 0) return;
-    let random = Math.floor(Math.random()*emptyBoxes.length)
-    index = emptyBoxes[random];
-    gameBoard.move(this, index);
   }
 
   switch (difficulty) {
@@ -244,8 +259,16 @@ const player = (id, name, type, mark, difficulty) => {
   const {play} = type == 'ia' ? ia(difficulty) : human();
   const markColor = mark == 'X' ? 'black' : 'red';
 
+  const setName = (newName) => {
+    name = newName;
+  }
+
+  playerName = document.getElementById(`${id}`);
+  playerName.addEventListener('change', () => console.log(`name changed for ${playerName.value}`));
+
   return {
     play,
+    setName,
     mark,
     markColor,
     id,
