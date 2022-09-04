@@ -76,11 +76,15 @@ const displayController = (() => {
     assignStartingTurn(player1); // Here I can change who starts
   }
 
+  const changePlayerName = (player, newName) => {
+    player.name = newName;
+  }
+
   // delete
-  const getPlayer = (n) => {
-    if (n == 1) {
+  const getPlayer = (playerId) => {
+    if (playerId == 'player1') {
       return player1; 
-    } else if (n == 2) {
+    } else if (playerId == 'player2') {
       return player2;
     } else {
       return;
@@ -91,7 +95,8 @@ const displayController = (() => {
     startGame,
     toogleActivePlayer,
     assignStartingTurn,
-    getPlayer
+    getPlayer,
+    changePlayerName
   }
 })();
 
@@ -255,16 +260,12 @@ const ia = (difficulty) => {
   return { play };
 }
 
-const player = (id, name, type, mark, difficulty) => {
+const player = function(id, name, type, mark, difficulty) {
   const {play} = type == 'ia' ? ia(difficulty) : human();
   const markColor = mark == 'X' ? 'black' : 'red';
 
-  const setName = (newName) => {
-    name = newName;
-  }
-
   playerName = document.getElementById(`${id}`);
-  playerName.addEventListener('change', () => console.log(`name changed for ${playerName.value}`));
+  playerName.addEventListener('change', (e) => displayController.changePlayerName(displayController.getPlayer(`${id}`), e.target.value));
 
   return {
     play,
