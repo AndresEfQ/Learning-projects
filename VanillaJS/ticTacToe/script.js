@@ -70,10 +70,13 @@ const displayController = (() => {
   }
   const startGame = (mode, difficulty) => {
     document.querySelector(".configuration").style.display = "none";
-    player1 = player('player1', 'Player 1', 'human', 'X');
+    player1 = player('player1', 'human', 'X');
     let player2Type = mode == 'single' ? 'ia' : 'human';
-    player2 = player('player2', 'Player 2', player2Type, 'O', difficulty);
+    player2 = player('player2', player2Type, 'O', difficulty);
     assignStartingTurn(player1); // Here I can change who starts
+    document.getElementById('player1').textContent = player1.name;
+
+    document.getElementById('player2').textContent = player2.name;
   }
 
   const changePlayerName = (player, newName) => {
@@ -101,6 +104,7 @@ const displayController = (() => {
 })();
 
 const human = () => {
+  let name = 'Player';
   let index;
   const displayBoard = document.querySelector('.gameboard');
   let bindedHandler;
@@ -114,12 +118,13 @@ const human = () => {
     let moved = gameBoard.move(this, index);
     if (moved) displayBoard.removeEventListener('click', bindedHandler);
   }
-  return { play };
+  return { name, play };
 }
 
 const ia = (difficulty) => {
   let play;
   let index;
+  let name;
 
   const minimax = function(board, player, isMax, depth) {
     let score;
@@ -244,24 +249,28 @@ const ia = (difficulty) => {
 
   switch (difficulty) {
     case 'extreme':
+      name = `Mor'du`
       play = extremePlay;
       break;
     case 'hard':
+      name = 'Cobra'
       play = hardPlay;
       break;
     case 'medium':
+      name = 'Shadow'
       play = midPlay;
       break;
     case 'easy':
+      name = 'Pengu'
       play = easyPlay;
       break;
   }
 
-  return { play };
+  return { name, play };
 }
 
-const player = function(id, name, type, mark, difficulty) {
-  const {play} = type == 'ia' ? ia(difficulty) : human();
+const player = function(id, type, mark, difficulty) {
+  const {name, play} = type == 'ia' ? ia(difficulty) : human();
   const markColor = mark == 'X' ? 'black' : 'red';
 
   playerName = document.getElementById(`${id}`);
@@ -269,7 +278,6 @@ const player = function(id, name, type, mark, difficulty) {
 
   return {
     play,
-    setName,
     mark,
     markColor,
     id,
@@ -278,4 +286,8 @@ const player = function(id, name, type, mark, difficulty) {
 };
 
 const options = Array.from(document.getElementsByClassName('game-option'));
-options.forEach(option => option.addEventListener('click', () => displayController.startGame(option.dataset['mode'], option.dataset['difficulty'])));
+options.forEach(option => {
+  option.addEventListener('click', () => {
+    displayController.startGame(option.dataset['mode'], option.dataset['difficulty'])
+  })
+});
