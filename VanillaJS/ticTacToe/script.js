@@ -2,17 +2,19 @@ const gameBoard = (() => {
   let board = new Array(9).fill(null);
   const winnerMessage = document.getElementById('winner-message');
   const winnerDiv = document.getElementById('winner');
-  const displayBoxes = Array.from(document.getElementsByClassName('box'));
+  let displayBoxes;
   let gameFinished;
 
   const checkWinner = (board, player) => {
     const lines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     return lines.some(line => line.every(box => board[box] == player.mark))
   }
+
   const checkTie = (board) => {
     const emptyBoxes = board.filter(box => box == null);
     if (emptyBoxes.length == 0) return true;
   }
+
   const showResult = (board, player) => {
     let message;
     if (checkWinner(board, player)) {
@@ -26,10 +28,12 @@ const gameBoard = (() => {
     winnerDiv.style.display = 'flex';
     return true;
   } 
+
   const move = (player, index) => {
     if (gameFinished || board[index]) return;
+    displayBoxes = Array.from(document.getElementsByClassName('box'));
     board[index] = player.mark;
-    displayBoxes[index].textContent = `${player.mark}`;
+    displayBoxes[index].innerHTML = `<div>${player.mark}<div>`;
     displayBoxes[index].classList = `box ${player.markColor}`;
     gameFinished = showResult(board, player);
     if (!gameFinished) {
@@ -37,10 +41,23 @@ const gameBoard = (() => {
     }
     return true;
   }
+
+  const cleanBoard = () => {
+    displayBoxes = Array.from(document.getElementsByClassName('box'));
+    board.fill(null);
+    displayBoxes.forEach(box => box.textContent = '');
+    winnerDiv.style.display = 'none';
+    gameFinished = false;
+    let displayBoard = document.querySelector('.gameboard');
+    let newDisplayBoard = displayBoard.cloneNode(true);
+    displayBoard.parentNode.replaceChild(newDisplayBoard, displayBoard);
+  }
+
   return {
     board,
     move,
-    checkWinner
+    checkWinner,
+    cleanBoard
   }
 })();
 
@@ -56,18 +73,31 @@ const displayController = (() => {
     showActivePlayer(activePlayer);
     player.play();
   }
+
   const toogleActivePlayer = () => {
     inactivePlayer = activePlayer;
     activePlayer = activePlayer == player1 ? player2 : player1;
     showActivePlayer(activePlayer);
     activePlayer.play();
   }
+
   const showActivePlayer = (player) => {
     const activePlayerName = document.getElementById(`${player.id}`);
     const inactivePlayerName = document.getElementById(`${inactivePlayer.id}`);
     activePlayerName.className = 'animate-character';
     inactivePlayerName.className = '';
   }
+
+   const newGame = () => {
+    gameBoard.cleanBoard();
+    document.querySelector(".configuration").style.display = "flex";
+  }
+
+  const resetGame = () => {
+    gameBoard.cleanBoard();
+    assignStartingTurn(player1);
+  }
+
   const startGame = (mode, difficulty) => {
     document.querySelector(".configuration").style.display = "none";
     player1 = player('player1', 'human', 'X');
@@ -75,8 +105,10 @@ const displayController = (() => {
     player2 = player('player2', player2Type, 'O', difficulty);
     assignStartingTurn(player1); // Here I can change who starts
     document.getElementById('player1').textContent = player1.name;
-
+    document.getElementById('player1').focus();
     document.getElementById('player2').textContent = player2.name;
+    document.getElementById('reset').addEventListener('click', resetGame);
+    document.getElementById('new').addEventListener('click', newGame);
   }
 
   const changePlayerName = (player, newName) => {
@@ -106,10 +138,15 @@ const displayController = (() => {
 const human = () => {
   let name = 'Player';
   let index;
-  const displayBoard = document.querySelector('.gameboard');
+  let displayBoard;
   let bindedHandler;
+  let root = document.querySelector(':root');
 
   const play = function() {
+    /*root.style.setProperty(`--mark`, `${this.mark}`);
+    root.style.setProperty(`--mark-color`, `${this.markColor}`);*/
+    console.log(this.markColor);
+    displayBoard = document.querySelector('.gameboard');
     bindedHandler = handleHumanMove.bind(this);
     displayBoard.addEventListener('click', bindedHandler);
   }
