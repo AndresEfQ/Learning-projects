@@ -5,7 +5,9 @@
   --red: #fb0025;
   --dark-red: #990022;
   --grey-gradient: linear-gradient(to left, var(--grey), var(--dark-grey));
-  --red-gradient: linear-gradient(to left, var(--dark-red), var(--red)); 
+  --red-gradient: linear-gradient(to left, var(--dark-red), var(--red));
+  --mark: 'X';
+  --mark-color: red;
 }
 
 * {
@@ -216,11 +218,35 @@ div:hover > textarea + img {
 
 .box {
   border: 3px solid var(--grey);
+  font-size: 7vh;
+  position: relative;
+}
+
+.box > div {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* font-family: 'Permanent Marker', cursive; */
-  font-size: 7vh;
+  height: 100%;
+  width: 100%;
+  background-color: var(--light-grey);
+  z-index: 1;
+  position: absolute;
+}
+
+.box::after {
+  display: none;
+  opacity: 0.4;
+  content: var(--mark);
+  color: var(--mark-color);
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
+.box:hover::after {
+  display: flex;
 }
 
 .red {
