@@ -18,7 +18,8 @@ const gameBoard = (() => {
   const showResult = (board, player) => {
     let message;
     if (checkWinner(board, player)) {
-      message = `${player.name} WINS!!`; 
+      message = player.name == 'Player' ? `${player.mark} WINS!!` : `${player.name} WINS!!`; 
+      console.log(message);
     } else if (checkTie(board)) {
       message = `It's a tie`;
     } else {
@@ -33,7 +34,7 @@ const gameBoard = (() => {
     if (gameFinished || board[index]) return;
     displayBoxes = Array.from(document.getElementsByClassName('box'));
     board[index] = player.mark;
-    displayBoxes[index].innerHTML = `<div>${player.mark}<div>`;
+    displayBoxes[index].innerHTML = `${player.mark}`;
     displayBoxes[index].classList = `box ${player.markColor}`;
     gameFinished = showResult(board, player);
     if (!gameFinished) {
