@@ -1,3 +1,4 @@
+// DOM elements
 const grid = document.querySelector('.grid');
 const openAddBook = document.querySelector('.add-book');
 const addBook = document.querySelector('#add-new-book')
@@ -7,19 +8,6 @@ const author = document.querySelector('#author');
 const language = document.querySelector('#language');
 const pages = document.querySelector('#pages');
 const isRead = document.querySelector('#read');
-
-addBook.addEventListener('submit', (e) => {
-  e.preventDefault();
-  addBookToLibrary(title.value, author.value, language.value, pages.value, isRead.checked);
-  title.value = ''
-  author.value = ''
-  language.value = ''
-  pages.value = ''
-  isRead.checked = false
-  renderBooks();
-});
-
-let myLibrary = []
 
 class Book {
   constructor(title, author, language, pages, isRead) {
@@ -31,46 +19,57 @@ class Book {
   }
   
   render = function() {
+
+    // book
     const thisBook = document.createElement('div');
     thisBook.classList.add('book');
     thisBook.dataset.title = `${this.title}-book`;
     
+    // book inner
     const bookInner = document.createElement('div');
     bookInner.tabIndex = '0';
     bookInner.dataset.title = `${this.title}-inner`;
     bookInner.addEventListener('blur', function() {this.parentNode.classList.remove('book-flipped')})
     bookInner.classList.add('book-inner');
     
+    // book front
     const bookFront = document.createElement('div');
     bookFront.classList.add('book-front');
     
+    // book title
     const title = document.createElement('h2');
     title.innerText = this.title;
     bookFront.appendChild(title);
     
+    // book author
     const author = document.createElement('p');
     author.innerText = `By: ${this.author}`;
     bookFront.appendChild(author);
     
+    // book language
     const language = document.createElement('p');
     language.innerText = `Language: ${this.language}`;
     bookFront.appendChild(language);
     
+    // book pages
     const pages = document.createElement('p');
     pages.innerText = `${this.pages} pages`;
     bookFront.appendChild(pages);
     
+    // book controls
     const controls = document.createElement('div');
     controls.classList.add('controls');
     
+    // control read
     const read = document.createElement('button');
     read.innerText = this.isRead ? 'Read' : 'Not read';
     read.classList = this.isRead ? 'read' : '';
     read.classList.add('button');
     read.dataset.title = `${this.title}`;
-    read.addEventListener('click', this.toggleRead);
+    read.addEventListener('click', (e) => this.toggleRead(e, activeLibrary));
     controls.appendChild(read);
     
+    // control remove
     const remove = document.createElement('button');
     remove.innerText = 'Remove';
     remove.classList.add('button');
@@ -81,6 +80,7 @@ class Book {
     bookFront.appendChild(controls);
     bookInner.appendChild(bookFront);
     
+    // book back
     const bookBack = document.createElement('div');
     bookBack.classList.add('book-back');
     
@@ -88,11 +88,12 @@ class Book {
     text.innerText = `Are you sure you want to remove ${this.title} by ${this.author}?`;
     bookBack.appendChild(text);
     
+    // confirm remove
     const confirmRemove = document.createElement('button');
     confirmRemove.innerText = 'Remove';
     confirmRemove.classList.add('button');
     confirmRemove.dataset.title = `${this.title}`;
-    confirmRemove.addEventListener('click', this.confirmRemove);
+    confirmRemove.addEventListener('click', (e) => this.confirmRemove(e, activeLibrary));
     bookBack.appendChild(confirmRemove);
     
     bookInner.appendChild(bookBack);
@@ -100,10 +101,10 @@ class Book {
     grid.appendChild(thisBook);
   }
   
-  toggleRead = function() {
-    const currentBook = myLibrary.find((book) => book.title == this.dataset.title);
+  toggleRead = function(e, library) {
+    const currentBook = library.content.find((book) => book.title == e.target.dataset.title);
     currentBook.isRead = currentBook.isRead ? false : true;
-    renderBooks();
+    library.renderBooks();
   }
   
   removeBook = function() {
@@ -111,25 +112,46 @@ class Book {
     document.querySelector(`[data-title="${this.dataset.title}-inner"]`).focus();
   }
   
-  confirmRemove = function() {
-    myLibrary = myLibrary.filter((book) => book.title != this.dataset.title);
-    renderBooks();
+  confirmRemove = function(e, library) {
+    library.content = library.content.filter((book) => book.title != e.target.dataset.title);
+    library.renderBooks();
   }
 }
 
-function addBookToLibrary(title, author, language, pages, isRead) {
-  const newBook = new Book(title, author, language, pages, isRead)
-  myLibrary.push(newBook);
+class Library {
+  constructor(){
+    this.content = []
+  }
+  
+  renderBooks = function() {
+    grid.innerHTML = ''
+    this.content.forEach((book) => book.render());
+    grid.appendChild(openAddBook);
+  }
+  
+  addBookToLibrary = function(title, author, language, pages, isRead) {
+    const newBook = new Book(title, author, language, pages, isRead)
+    this.content.push(newBook);
+    this.renderBooks();
+  }
+  
+  cleanForm = function() {
+    title.value = ''
+    author.value = ''
+    language.value = ''
+    pages.value = ''
+    isRead.checked = false
+  }
 }
 
-function renderBooks() {
-  grid.innerHTML = ''
-  myLibrary.forEach((book) => book.render());
-  grid.appendChild(openAddBook);
-}
+let myClassLibrary = new Library();
+let activeLibrary = myClassLibrary // Here I can show different libraries if I want to implement multiple ones
 
-// Sample book
-const sampleBook = new Book('Piense y hagase rico', 'Napleon Hill', 'Español', '263', false);
+addBook.addEventListener('submit', (e) => {
+  e.preventDefault();
+  activeLibrary.addBookToLibrary(title.value, author.value, language.value, pages.value, isRead.checked);
+  activeLibrary.cleanForm();
+});
 
-myLibrary.push(sampleBook);
-renderBooks();
+// sample book
+activeLibrary.addBookToLibrary('Piense y hagase rico', 'Napleon Hill', 'Español', '263', false);
