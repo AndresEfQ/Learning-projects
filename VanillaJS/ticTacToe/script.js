@@ -141,11 +141,8 @@ const human = () => {
   let index;
   let displayBoard;
   let bindedHandler;
-  let root = document.querySelector(':root');
 
   const play = function() {
-    /*root.style.setProperty(`--mark`, `${this.mark}`);
-    root.style.setProperty(`--mark-color`, `${this.markColor}`);*/
     console.log(this.markColor);
     displayBoard = document.querySelector('.gameboard');
     bindedHandler = handleHumanMove.bind(this);
@@ -311,7 +308,7 @@ const player = function(id, type, mark, difficulty) {
   const {name, play} = type == 'ia' ? ia(difficulty) : human();
   const markColor = mark == 'X' ? 'black' : 'red';
 
-  playerName = document.getElementById(`${id}`);
+  const playerName = document.getElementById(`${id}`);
   playerName.addEventListener('change', (e) => displayController.changePlayerName(displayController.getPlayer(`${id}`), e.target.value));
 
   return {
