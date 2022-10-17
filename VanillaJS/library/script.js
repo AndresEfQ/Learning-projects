@@ -101,18 +101,18 @@ class Book {
     grid.appendChild(thisBook);
   }
   
-  toggleRead = function(e, library) {
+  toggleRead = function (e, library) {
     const currentBook = library.content.find((book) => book.title == e.target.dataset.title);
     currentBook.isRead = currentBook.isRead ? false : true;
     library.renderBooks();
   }
   
-  removeBook = function() {
+  removeBook = function () {
     document.querySelector(`[data-title="${this.dataset.title}-book"]`).classList.add('book-flipped');
     document.querySelector(`[data-title="${this.dataset.title}-inner"]`).focus();
   }
   
-  confirmRemove = function(e, library) {
+  confirmRemove = function (e, library) {
     library.content = library.content.filter((book) => book.title != e.target.dataset.title);
     library.renderBooks();
   }
@@ -123,19 +123,26 @@ class Library {
     this.content = []
   }
   
-  renderBooks = function() {
+  renderBooks = function () {
     grid.innerHTML = ''
     this.content.forEach((book) => book.render());
     grid.appendChild(openAddBook);
   }
+
+  resetFormValidity = function () {
+    title.setCustomValidity('');
+    author.setCustomValidity('');
+    language.setCustomValidity('');
+    pages.setCustomValidity('');
+  }
   
-  addBookToLibrary = function(title, author, language, pages, isRead) {
+  addBookToLibrary = function (title, author, language, pages, isRead) {
     const newBook = new Book(title, author, language, pages, isRead)
     this.content.push(newBook);
     this.renderBooks();
   }
   
-  cleanForm = function() {
+  cleanForm = function () {
     title.value = ''
     author.value = ''
     language.value = ''
@@ -151,9 +158,41 @@ let activeLibrary = myClassLibrary
 
 addBook.addEventListener('submit', (e) => {
   e.preventDefault();
+  addBook.checkValidity();
   activeLibrary.addBookToLibrary(title.value, author.value, language.value, pages.value, isRead.checked);
   activeLibrary.cleanForm();
 });
 
+title.addEventListener('invalid', () => {
+  if (title.validity.valueMissing) {
+    title.setCustomValidity('Your book needs a title');
+  } 
+});
+
+author.addEventListener('invalid', () => {
+  if (author.validity.valueMissing) {
+    author.setCustomValidity('Please enter your book\'s author name');
+  }
+});
+
+language.addEventListener('invalid', () => {
+  if (language.validity.valueMissing) {
+    language.setCustomValidity('Please tell us in which language is your book written');
+  }
+});
+
+pages.addEventListener('invalid', () => {
+  if (pages.validity.valueMissing) {
+    pages.setCustomValidity('How many pages does your book have?');
+  }
+});
+
+addBook.addEventListener('input', () => {
+  title.setCustomValidity('');
+  author.setCustomValidity('');
+  language.setCustomValidity('');
+  pages.setCustomValidity('');
+});
+
 // sample book
-activeLibrary.addBookToLibrary('Piense y hagase rico', 'Napleon Hill', 'Español', '263', false);
+activeLibrary.addBookToLibrary('Harry Potter y la piedra filosofal', 'J.K. Rowling', 'Español', '314', true);
