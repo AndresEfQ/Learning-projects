@@ -145,7 +145,9 @@ class Library {
 }
 
 let myClassLibrary = new Library();
-let activeLibrary = myClassLibrary // Here I can show different libraries if I want to implement multiple ones
+
+// Here I can show different libraries if I want to implement multiple ones
+let activeLibrary = myClassLibrary 
 
 addBook.addEventListener('submit', (e) => {
   e.preventDefault();
